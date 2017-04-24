@@ -93,7 +93,7 @@ Aquaplane.Game.prototype = {
     init: function () {
 
         this.score = 0;
-        this.lives = 3;
+        this.lives = 30;
         this.speed = 420;
 
         this.ready = false;
