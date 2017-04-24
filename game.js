@@ -68,7 +68,7 @@ Aquaplane.Game = function (game) {
     this.lives = 30;
     this.livesText = null;
 
-    this.speed = 420;
+    this.speed = 42;
     this.lastKey = 0;
     this.ready = false;
 
@@ -94,7 +94,7 @@ Aquaplane.Game.prototype = {
 
         this.score = 0;
         this.lives = 30;
-        this.speed = 420;
+        this.speed = 42;
 
         this.ready = false;
         this.lastKey = 0;
