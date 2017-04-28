@@ -19,9 +19,9 @@ Aquaplane.Preloader.prototype = {
         this.load.bitmapFont('fat-and-tiny');
         this.load.bitmapFont('interfont');
 
-        this.load.images([ 'logo', 'boat', 'skier', 'pole', 'rock', 'shark', 'sea' ]);
+        this.load.images([ 'logo', 'boat', 'pole', 'rock', 'shark', 'sea' ]);
         this.load.spritesheet('waves', 'waves.png', 16, 6);
-
+        // this.load.images(['skier']);
     },
 
     create: function () {
@@ -76,7 +76,7 @@ Aquaplane.Game = function (game) {
     this.itemDist = ['pole', 'pole', 'pole', 'rock', 'rock', 'rock', 'shark'];
 
     this.boat = null;
-    this.skier = null;
+    // this.skier = null;
     this.rope = null;
 
     this.timer = null;
@@ -139,19 +139,19 @@ Aquaplane.Game.prototype = {
         this.boat.body.fixedRotation = true;
         this.boat.body.collideWorldBounds = false;
 
-        this.skier = this.layer.create(0, 0, 'skier');
+        //  this.skier = this.layer.create(0, 0, 'skier');
 
-        this.physics.p2.enable(this.skier, false);
+      //  this.physics.p2.enable(this.skier, false);
 
-        this.skier.body.mass = 0.05;
-        this.skier.body.damping = 0.5;
-        this.skier.body.fixedRotation = true;
-        this.skier.body.collideWorldBounds = false;
+      //  this.skier.body.mass = 0.05;
+      //  this.skier.body.damping = 0.5;
+       // this.skier.body.fixedRotation = true;
+      //  this.skier.body.collideWorldBounds = false;
 
         this.boatBounds = new Phaser.Rectangle(0, 0, 60, 10);
-        this.skierBounds = new Phaser.Rectangle(0, 0, 30, 8);
+      //  this.skierBounds = new Phaser.Rectangle(0, 0, 30, 8);
 
-        var rev = new p2.RevoluteConstraint(this.boat.body.data, this.skier.body.data, {
+     //   var rev = new p2.RevoluteConstraint(this.boat.body.data, this.skier.body.data, {
                 localPivotA: [9, 0],
                 localPivotB: [2, 0],
                 collideConnected: false
@@ -183,28 +183,28 @@ Aquaplane.Game.prototype = {
             area.y += 65;
         }
 
-        this.line = new Phaser.Line(this.boat.x - 28, this.boat.y, this.skier.x + 6, this.skier.y - 1);
+   //     this.line = new Phaser.Line(this.boat.x - 28, this.boat.y, this.skier.x + 6, this.skier.y - 1);
 
         //  The rope that attaches the water skier to the boat
-        this.rope = this.add.graphics(0, 0);
+ //       this.rope = this.add.graphics(0, 0);
 
-        this.scoreText = this.add.bitmapText(16, 0, 'fat-and-tiny', 'SCORE: 0', 32);
-        this.scoreText.smoothed = false;
+  //      this.scoreText = this.add.bitmapText(16, 0, 'fat-and-tiny', 'SCORE: 0', 32);
+  //      this.scoreText.smoothed = false;
 
-        this.livesText = this.add.bitmapText(680, 0, 'fat-and-tiny', 'LIVES: ' + this.lives, 32);
-        this.livesText.smoothed = false;
+  //      this.livesText = this.add.bitmapText(680, 0, 'fat-and-tiny', 'LIVES: ' + this.lives, 32);
+  //      this.livesText.smoothed = false;
 
-        this.cursors = this.input.keyboard.createCursorKeys();
+   //     this.cursors = this.input.keyboard.createCursorKeys();
 
         //  Press P to pause and resume the game
-        this.pauseKey = this.input.keyboard.addKey(Phaser.Keyboard.P);
-        this.pauseKey.onDown.add(this.togglePause, this);
+     //   this.pauseKey = this.input.keyboard.addKey(Phaser.Keyboard.P);
+     //   this.pauseKey.onDown.add(this.togglePause, this);
 
         //  Press D to toggle the debug display
-        this.debugKey = this.input.keyboard.addKey(Phaser.Keyboard.D);
-        this.debugKey.onDown.add(this.toggleDebug, this);
+    //    this.debugKey = this.input.keyboard.addKey(Phaser.Keyboard.D);
+    //    this.debugKey.onDown.add(this.toggleDebug, this);
 
-        this.bringBoatOn();
+    //    this.bringBoatOn();
 
     },
 
@@ -227,9 +227,9 @@ Aquaplane.Game.prototype = {
         this.boat.body.x = -64;
         this.boat.body.y = 300;
 
-        this.skier.visible = true;
-        this.skier.body.x = -264;
-        this.skier.body.y = 300;
+     //   this.skier.visible = true;
+      //  this.skier.body.x = -264;
+     //   this.skier.body.y = 300;
 
         this.boat.body.velocity.x = 300;
 
@@ -306,7 +306,7 @@ Aquaplane.Game.prototype = {
         }
         else
         {
-            if (this.skier.visible)
+     //       if (this.skier.visible)
             {
                 if (this.boat.x >= 250)
                 {
@@ -323,7 +323,7 @@ Aquaplane.Game.prototype = {
         }
 
         this.boatBounds.centerOn(this.boat.x + 4, this.boat.y + 8);
-        this.skierBounds.centerOn(this.skier.x + 2, this.skier.y + 10);
+    //    this.skierBounds.centerOn(this.skier.x + 2, this.skier.y + 10);
 
         this.emitter.emitX = this.boat.x - 16;
         this.emitter.emitY = this.boat.y + 10;
@@ -383,7 +383,7 @@ Aquaplane.Game.prototype = {
 
     checkItem: function (item) {
 
-        if (item === this.boat || item === this.skier)
+  //      if (item === this.boat || item === this.skier)
         {
             return;
         }
@@ -402,7 +402,7 @@ Aquaplane.Game.prototype = {
         else
         {
             //   Check for collision
-            if (this.ready && item.key !== 'waves' && this.skierBounds.intersects(item.body))
+   //         if (this.ready && item.key !== 'waves' && this.skierBounds.intersects(item.body))
             {
                 this.loseLife();
             }
@@ -425,7 +425,7 @@ Aquaplane.Game.prototype = {
             this.ready = false;
 
             //  Kill the surfer!
-            this.skier.visible = false;
+  //          this.skier.visible = false;
 
             //  Hide the rope
             this.rope.clear();
@@ -448,9 +448,9 @@ Aquaplane.Game.prototype = {
 
     preRender: function () {
 
-        this.line.setTo(this.boat.x - 28, this.boat.y, this.skier.x + 6, this.skier.y - 1);
+      //  this.line.setTo(this.boat.x - 28, this.boat.y, this.skier.x + 6, this.skier.y - 1);
 
-        if (this.skier.visible)
+      //  if (this.skier.visible)
         {
             this.rope.clear();
             this.rope.lineStyle(1, 0xffffff, 1);
@@ -466,16 +466,16 @@ Aquaplane.Game.prototype = {
         if (this.showDebug)
         {
             this.game.debug.geom(this.boatBounds);
-            this.game.debug.geom(this.skierBounds);
+     //       this.game.debug.geom(this.skierBounds);
             this.layer.forEachAlive(this.renderBody, this);
-            this.game.debug.geom(this.skier.position, 'rgba(255,255,0,1)');
+        //    this.game.debug.geom(this.skier.position, 'rgba(255,255,0,1)');
         }
 
     },
 
     renderBody: function (sprite) {
 
-        if (sprite === this.boat || sprite === this.skier || sprite.key === 'waves')
+    //    if (sprite === this.boat || sprite === this.skier || sprite.key === 'waves')
         {
             return;
         }
