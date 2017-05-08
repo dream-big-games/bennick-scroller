@@ -161,11 +161,6 @@ Aquaplane.Game.prototype = {
                 localPivotB: [2, 0],
                 collideConnected: false
             });
-      // var rev = new p2.RevoluteConstraint(this.boat.body.data {
-        //        localPivotA: [9, 0],
-                // localPivotB: [2, 0],
-           //     collideConnected: false
-            //});
 
         this.physics.p2.world.addConstraint(rev);
 
@@ -196,7 +191,7 @@ Aquaplane.Game.prototype = {
         this.line = new Phaser.Line(this.boat.x - 28, this.boat.y, this.skier.x + 6, this.skier.y - 1);
 
         //  The rope that attaches the water skier to the boat
-        // this.rope = this.add.graphics(0, 0);
+        this.rope = this.add.graphics(0, 0);
 
         this.scoreText = this.add.bitmapText(16, 0, 'fat-and-tiny', 'SCORE: 0', 32);
         this.scoreText.smoothed = false;
@@ -496,7 +491,7 @@ Aquaplane.Game.prototype = {
 
 };
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
+var game = new Phaser.Game(900, 600, Phaser.AUTO, 'game');
 
 game.state.add('Aquaplane.Preloader', Aquaplane.Preloader);
 game.state.add('Aquaplane.MainMenu', Aquaplane.MainMenu);
