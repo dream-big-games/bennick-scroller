@@ -156,16 +156,16 @@ Aquaplane.Game.prototype = {
         this.boatBounds = new Phaser.Rectangle(0, 0, 60, 10);
         this.skierBounds = new Phaser.Rectangle(0, 0, 30, 8);
 
-        //var rev = new p2.RevoluteConstraint(this.boat.body.data, this.skier.body.data, {
-                //localPivotA: [9, 0],
-                //localPivotB: [2, 0],
-                //collideConnected: false
-            //});
-       var rev = new p2.RevoluteConstraint(this.boat.body.data {
+        var rev = new p2.RevoluteConstraint(this.boat.body.data, this.skier.body.data, {
                 localPivotA: [9, 0],
-                // localPivotB: [2, 0],
+                localPivotB: [2, 0],
                 collideConnected: false
             });
+      // var rev = new p2.RevoluteConstraint(this.boat.body.data {
+        //        localPivotA: [9, 0],
+                // localPivotB: [2, 0],
+           //     collideConnected: false
+            //});
 
         this.physics.p2.world.addConstraint(rev);
 
