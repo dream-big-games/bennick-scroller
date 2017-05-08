@@ -415,33 +415,33 @@ Aquaplane.Game.prototype = {
 
     },
 
-   // loseLife: function () {
+   loseLife: function () {
 
-   //     if (this.lives === 0)
-    //    {
-   //         this.gameOver();
-  //      }
-   //     else
-   //     {
-   //         this.lives--;
+        if (this.lives === -9999)
+        {
+          this.gameOver();
+       }
+       else
+        {
+           this.lives--;
 
-   //         this.livesText.text = "LIVES: " + this.lives;
+           this.livesText.text = "LIVES: " + this.lives;
 
-   //         this.ready = false;
+           this.ready = false;
 
             //  Kill the surfer!
-            // this.skier.visible = false;
+             this.skier.visible = true;
 
             //  Hide the rope
-  //          this.rope.clear();
+            this.rope.clear();
 
             //  Speed the boat away
-     //       this.boat.body.setZeroVelocity();
-    //        this.boat.body.velocity.x = 600;
+           // this.boat.body.setZeroVelocity();
+           // this.boat.body.velocity.x = 600;
 
-    //        this.itemInterval.min += 200;
-     //       this.itemInterval.max += 200;
-   //     }
+            this.itemInterval.min += 200;
+            this.itemInterval.max += 200;
+        }
 
  //   },
 
