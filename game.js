@@ -417,7 +417,7 @@ Aquaplane.Game.prototype = {
 
    loseLife: function () {
 
-        if (this.lives === -9999)
+        if (this.lives === 0)
         {
           this.gameOver();
        }
