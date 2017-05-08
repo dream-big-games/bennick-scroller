@@ -415,35 +415,35 @@ Aquaplane.Game.prototype = {
 
     },
 
-   loseLife: function () {
+    loseLife: function () {
 
         if (this.lives === 0)
         {
-          this.gameOver();
-       }
-       else
+            this.gameOver();
+        }
+        else
         {
-           this.lives--;
+            this.lives--;
 
-           this.livesText.text = "LIVES: " + this.lives;
+            this.livesText.text = "LIVES: " + this.lives;
 
-           this.ready = false;
+            this.ready = false;
 
             //  Kill the surfer!
-             this.skier.visible = true;
+            this.skier.visible = false;
 
             //  Hide the rope
             this.rope.clear();
 
             //  Speed the boat away
-           // this.boat.body.setZeroVelocity();
-           // this.boat.body.velocity.x = 600;
+            this.boat.body.setZeroVelocity();
+            this.boat.body.velocity.x = 600;
 
             this.itemInterval.min += 200;
             this.itemInterval.max += 200;
         }
 
- //   },
+    },
 
     gameOver: function () {
 
@@ -491,7 +491,7 @@ Aquaplane.Game.prototype = {
 
 };
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
+var game = new Phaser.Game(1200, 900, Phaser.AUTO, 'game');
 
 game.state.add('Aquaplane.Preloader', Aquaplane.Preloader);
 game.state.add('Aquaplane.MainMenu', Aquaplane.MainMenu);
