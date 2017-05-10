@@ -19,7 +19,7 @@ Aquaplane.Preloader.prototype = {
         this.load.bitmapFont('fat-and-tiny');
         this.load.bitmapFont('interfont');
 
-        this.load.images([ 'logo', 'boat', 'skier', 'pole', 'rock', 'shark', 'sea' ]);
+        this.load.images([ 'logo', 'low-rez-corgi', 'skier', 'pole', 'rock', 'shark', 'sea' ]);
         this.load.spritesheet('waves', 'waves.png', 16, 6);
 //        var sea = this.load.image('sea', 'sea.png');
 //        sea.height = game.height
