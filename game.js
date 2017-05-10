@@ -458,7 +458,7 @@ Aquaplane.Game.prototype = {
         if (this.skier.visible)
         {
             this.rope.clear();
-            this.rope.lineStyle(1, 0xffffff, 1);
+            this.rope.lineStyle(1, 0xffffff, 0);
             this.rope.moveTo(this.line.start.x, this.line.start.y);
             this.rope.lineTo(this.line.end.x, this.line.end.y);
             this.rope.endFill();
