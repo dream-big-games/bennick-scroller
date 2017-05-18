@@ -154,7 +154,8 @@ Aquaplane.Game.prototype = {
         this.skier.body.collideWorldBounds = false;
 
         this.boatBounds = new Phaser.Rectangle(0, 0, 60, 10);
-        this.skierBounds = new Phaser.Rectangle(0, 0, 30, 8);
+        //this.skierBounds = new Phaser.Rectangle(0, 0, 30, 8);
+        this.skierBounds = new Phaser.Rectangle(0, 0, 0, 0);
 
         var rev = new p2.RevoluteConstraint(this.boat.body.data, this.skier.body.data, {
                 localPivotA: [9, 0],
