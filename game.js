@@ -408,7 +408,8 @@ Aquaplane.Game.prototype = {
         else
         {
             //   Check for collision
-            if (this.ready && item.key !== 'waves' && this.skierBounds.intersects(item.body))
+           //if (this.ready && item.key !== 'waves' && this.skierBounds.intersects(item.body))
+             if (this.ready && item.key !== 'waves' && this.boatBounds.intersects(item.body))
             {
                 this.loseLife();
             }
@@ -431,17 +432,17 @@ Aquaplane.Game.prototype = {
             this.ready = false;
 
             //  Kill the surfer!
-            this.skier.visible = false;
+            this.boat.visible = false;
 
             //  Hide the rope
             this.rope.clear();
 
             //  Speed the boat away
-            this.boat.body.setZeroVelocity();
-            this.boat.body.velocity.x = 600;
+           // this.boat.body.setZeroVelocity();
+           // this.boat.body.velocity.x = 600;
 
-            this.itemInterval.min += 200;
-            this.itemInterval.max += 200;
+           // this.itemInterval.min += 200;
+           // this.itemInterval.max += 200;
         }
 
     },
