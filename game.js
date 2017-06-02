@@ -21,7 +21,7 @@ Aquaplane.Preloader.prototype = {
 
         this.load.images(['Blank', 'pole', 'rock', 'shark', 'sea' ]);
         this.load.spritesheet('waves', 'waves.png', 16, 6);
-        this.load.spritesheet('low-rez-corgi', 'low-rez-corgi.png', 64, 64, 2);
+        this.load.spritesheet('corgi', 'low-rez-corgi.png', 64, 64, 2);
 //        var sea = this.load.image('sea', 'sea.png');
 //        sea.height = game.height
 //        sea.width = game.width
@@ -79,7 +79,7 @@ Aquaplane.Game = function (game) {
     this.layer = null;
     this.itemDist = ['pole', 'pole', 'pole', 'rock', 'rock', 'rock', 'shark'];
 
-    this.boat = null;
+    this.corgi = null;
     this.skier = null;
     this.rope = null;
 
@@ -136,14 +136,14 @@ Aquaplane.Game.prototype = {
 
         this.layer = this.add.group();
 
-        this.boat = this.layer.create(0, 0, 'low-rez-corgi');
+        this.corgi = this.layer.create(0, 0, 'corgi');
 
-        this.physics.p2.enable(this.boat, false);
+        this.physics.p2.enable(this.corgi, false);
 
-        this.boat.body.mass = 1;
-        this.boat.body.damping = 0.5;
-        this.boat.body.fixedRotation = true;
-        this.boat.body.collideWorldBounds = false;
+        this.corgi.body.mass = 1;
+        this.corgi.body.damping = 0.5;
+        this.corgi.body.fixedRotation = true;
+        this.corgi.body.collideWorldBounds = false;
 
         this.skier = this.layer.create(0, 0, 'skier');
 
@@ -154,11 +154,11 @@ Aquaplane.Game.prototype = {
         this.skier.body.fixedRotation = true;
         this.skier.body.collideWorldBounds = false;
 
-        this.boatBounds = new Phaser.Rectangle(0, 0, 60, 10);
+        this.corgiBounds = new Phaser.Rectangle(0, 0, 60, 10);
         //this.skierBounds = new Phaser.Rectangle(0, 0, 30, 8);
         this.skierBounds = new Phaser.Rectangle(0, 0, 0, 0);
 
-        var rev = new p2.RevoluteConstraint(this.boat.body.data, this.skier.body.data, {
+        var rev = new p2.RevoluteConstraint(this.corgi.body.data, this.skier.body.data, {
                 localPivotA: [9, 0],
                 localPivotB: [2, 0],
                 collideConnected: false
@@ -190,9 +190,9 @@ Aquaplane.Game.prototype = {
             area.y += 65;
         }
 
-        this.line = new Phaser.Line(this.boat.x - 28, this.boat.y, this.skier.x + 6, this.skier.y - 1);
+        this.line = new Phaser.Line(this.corgi.x - 28, this.corgi.y, this.skier.x + 6, this.skier.y - 1);
 
-        //  The rope that attaches the water skier to the boat
+        //  The rope that attaches the water skier to the corgi
         this.rope = this.add.graphics(0, 0);
 
         this.scoreText = this.add.bitmapText(16, 0, 'fat-and-tiny', 'SCORE: 0', 32);
@@ -211,7 +211,7 @@ Aquaplane.Game.prototype = {
         this.debugKey = this.input.keyboard.addKey(Phaser.Keyboard.D);
         this.debugKey.onDown.add(this.toggleDebug, this);
 
-        this.bringBoatOn();
+        this.bringcorgiOn();
 
     },
 
@@ -227,26 +227,26 @@ Aquaplane.Game.prototype = {
 
     },
 
-    bringBoatOn: function () {
+    bringcorgiOn: function () {
 
         this.ready = false;
 
-        this.boat.body.x = -64;
-        this.boat.body.y = 300;
+        this.corgi.body.x = -64;
+        this.corgi.body.y = 300;
 
         this.skier.visible = true;
         this.skier.body.x = -264;
         this.skier.body.y = 300;
 
-        this.boat.body.velocity.x = 300;
+        this.corgi.body.velocity.x = 300;
 
     },
 
-    boatReady: function () {
+    corgiReady: function () {
 
         this.ready = true;
         
-        this.boat.body.setZeroVelocity();
+        this.corgi.body.setZeroVelocity();
 
         this.timer.add(this.itemInterval.max, this.releaseItem, this);
         this.timer.start();
@@ -305,7 +305,7 @@ Aquaplane.Game.prototype = {
 
         if (this.ready)
         {
-            this.updateBoat();
+            this.updatecorgi();
 
             //  Score based on their position on the screen
             this.score += (this.math.snapToFloor(this.skier.y, 65) / 65);
@@ -315,74 +315,74 @@ Aquaplane.Game.prototype = {
         {
             if (this.skier.visible)
             {
-                if (this.boat.x >= 250)
+                if (this.corgi.x >= 250)
                 {
-                    this.boatReady();
+                    this.corgiReady();
                 }
             }
             else
             {
-                if (this.boat.x >= 832)
+                if (this.corgi.x >= 832)
                 {
-                    this.bringBoatOn();
+                    this.bringcorgiOn();
                 }
             }
         }
 
-        this.boatBounds.centerOn(this.boat.x + 4, this.boat.y + 8);
+        this.corgiBounds.centerOn(this.corgi.x + 4, this.corgi.y + 8);
         this.skierBounds.centerOn(this.skier.x + 2, this.skier.y + 10);
 
-        this.emitter.emitX = this.boat.x - 16;
-        this.emitter.emitY = this.boat.y + 10;
+        this.emitter.emitX = this.corgi.x - 16;
+        this.emitter.emitY = this.corgi.y + 10;
 
         //  Let's sort and collide
         this.layer.forEachAlive(this.checkItem, this);
 
     },
 
-    updateBoat: function () {
+    updatecorgi: function () {
 
-        if (this.boat.x < 200)
+        if (this.corgi.x < 200)
         {
-            this.boat.body.setZeroForce();
-            this.boat.body.x = 200;
+            this.corgi.body.setZeroForce();
+            this.corgi.body.x = 200;
         }
-        else if (this.boat.x > 750)
+        else if (this.corgi.x > 750)
         {
-            this.boat.body.setZeroForce();
-            this.boat.body.x = 750;
+            this.corgi.body.setZeroForce();
+            this.corgi.body.x = 750;
         }
 
-        if (this.boat.y < 100)
+        if (this.corgi.y < 100)
         {
-            this.boat.body.setZeroForce();
-            this.boat.body.y = 100;
+            this.corgi.body.setZeroForce();
+            this.corgi.body.y = 100;
         }
-        else if (this.boat.y > 550)
+        else if (this.corgi.y > 550)
         {
-            this.boat.body.setZeroForce();
-            this.boat.body.y = 550;
+            this.corgi.body.setZeroForce();
+            this.corgi.body.y = 550;
         }
 
         if (this.cursors.left.isDown)
         {
-            this.boat.body.force.x = -this.speed;
+            this.corgi.body.force.x = -this.speed;
             this.lastKey = this.time.time;
         }
         else if (this.cursors.right.isDown)
         {
-            this.boat.body.force.x = this.speed;
+            this.corgi.body.force.x = this.speed;
             this.lastKey = this.time.time;
         }
 
         if (this.cursors.up.isDown)
         {
-            this.boat.body.force.y = -this.speed;
+            this.corgi.body.force.y = -this.speed;
             this.lastKey = this.time.time;
         }
         else if (this.cursors.down.isDown)
         {
-            this.boat.body.force.y = this.speed;
+            this.corgi.body.force.y = this.speed;
             this.lastKey = this.time.time;
         }
 
@@ -390,7 +390,7 @@ Aquaplane.Game.prototype = {
 
     checkItem: function (item) {
 
-        if (item === this.boat || item === this.skier)
+        if (item === this.corgi || item === this.skier)
         {
             return;
         }
@@ -410,7 +410,7 @@ Aquaplane.Game.prototype = {
         {
             //   Check for collision
            //if (this.ready && item.key !== 'waves' && this.skierBounds.intersects(item.body))
-             if (this.ready && item.key !== 'waves' && this.boatBounds.intersects(item.body))
+             if (this.ready && item.key !== 'waves' && this.corgiBounds.intersects(item.body))
             {
                 this.loseLife();
             }
@@ -433,14 +433,14 @@ Aquaplane.Game.prototype = {
             this.ready = false;
 
             //  Kill the surfer!
-            this.boat.visible = false;
+            this.corgi.visible = false;
 
             //  Hide the rope
             this.rope.clear();
 
-            //  Speed the boat away
-            this.boat.body.setZeroVelocity();
-            this.boat.body.velocity.x = 600;
+            //  Speed the corgi away
+            this.corgi.body.setZeroVelocity();
+            this.corgi.body.velocity.x = 600;
 
             this.itemInterval.min += 200;
             this.itemInterval.max += 200;
@@ -456,7 +456,7 @@ Aquaplane.Game.prototype = {
 
     preRender: function () {
 
-        this.line.setTo(this.boat.x - 28, this.boat.y, this.skier.x + 6, this.skier.y - 1);
+        this.line.setTo(this.corgi.x - 28, this.corgi.y, this.skier.x + 6, this.skier.y - 1);
 
         if (this.skier.visible)
         {
@@ -473,7 +473,7 @@ Aquaplane.Game.prototype = {
 
         if (this.showDebug)
         {
-            this.game.debug.geom(this.boatBounds);
+            this.game.debug.geom(this.corgiBounds);
             this.game.debug.geom(this.skierBounds);
             this.layer.forEachAlive(this.renderBody, this);
             this.game.debug.geom(this.skier.position, 'rgba(255,255,0,1)');
@@ -483,7 +483,7 @@ Aquaplane.Game.prototype = {
 
     renderBody: function (sprite) {
 
-        if (sprite === this.boat || sprite === this.skier || sprite.key === 'waves')
+        if (sprite === this.corgi || sprite === this.skier || sprite.key === 'waves')
         {
             return;
         }
