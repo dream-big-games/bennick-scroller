@@ -137,7 +137,10 @@ Aquaplane.Game.prototype = {
         this.layer = this.add.group();
 
         this.corgi = this.layer.create(0, 0, 'corgi');
-
+        var corgi = game.add.sprite('corgi');
+        var run = corgi.animations.add('run');
+        corgi.animations.play('run', 2, true);
+        
         this.physics.p2.enable(this.corgi, false);
 
         this.corgi.body.mass = 1;
