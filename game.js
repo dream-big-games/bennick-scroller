@@ -20,7 +20,7 @@ Aquaplane.Preloader.prototype = {
         this.load.bitmapFont('fat-and-tiny');
         this.load.bitmapFont('interfont');
 
-        this.load.images(['Blank', 'pole', 'rock', 'shark', 'sea' ]);
+        this.load.images(['Blank', 'pole', 'rock', 'shark', 'background' ]);
         this.load.spritesheet('waves', 'waves.png', 16, 6);
         this.load.spritesheet('low-rez-corgi', 'low-rez-corgi.png', 64, 64, 2);
 //        var sea = this.load.image('sea', 'sea.png');
