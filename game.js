@@ -178,17 +178,17 @@ Aquaplane.Game.prototype = {
 
         var area = new Phaser.Rectangle(0, 80, this.game.width, 65);
 
-        for (var i = 1; i <= 8; i++)
+      / for (var i = 1; i <= 8; i++)
         {
             for (var w = 0; w < 8; w++)
-            {
+           {
                 var wave = this.layer.create(area.randomX, area.randomY, 'waves', this.rnd.between(0, 2));
                 wave.anchor.y = -1.5;
                 this.physics.arcade.enable(wave);
-                wave.body.velocity.x = -120 + (i * -30);
-            }
+               wave.body.velocity.x = -120 + (i * -30);
+           }
 
-            area.y += 65;
+          area.y += 65;
         }
 
         this.line = new Phaser.Line(this.boat.x - 28, this.boat.y, this.skier.x + 6, this.skier.y - 1);
