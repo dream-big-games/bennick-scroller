@@ -1,4 +1,3 @@
-// bennic scroller
 var Aquaplane = {};
 
 Aquaplane.Preloader = function () {};
@@ -20,12 +19,11 @@ Aquaplane.Preloader.prototype = {
         this.load.bitmapFont('fat-and-tiny');
         this.load.bitmapFont('interfont');
 
-        this.load.images(['Blank', 'pole', 'rock', 'shark', 'sea' ]);
+        this.load.images('Blank', 'pole', 'rock', 'shark', 'background', 'low-rez-corgi']);
         this.load.spritesheet('waves', 'waves.png', 16, 6);
-        this.load.spritesheet('low-rez-corgi', 'low-rez-corgi.png', 64, 64, 2);
-//        var sea = this.load.image('sea', 'sea.png');
-//        sea.height = game.height
-//        sea.width = game.width
+       // var sea = this.load.image('background', 'background.png');
+      //  background.height = game.height
+      //  background.width = game.width
 
     },
 
@@ -117,8 +115,8 @@ Aquaplane.Game.prototype = {
     create: function () {
 
         this.add.image(0, 0, 'sea');
-//         sea.height = game.height
-//         sea.width = game.width
+         sea.height = game.height
+         sea.width = game.width
 
         this.waterParticle = this.make.bitmapData(2, 2);
         this.waterParticle.rect(0, 0, 2, 2, '#ffffff');
@@ -178,17 +176,17 @@ Aquaplane.Game.prototype = {
 
         var area = new Phaser.Rectangle(0, 80, this.game.width, 65);
 
-      / for (var i = 1; i <= 8; i++)
+        for (var i = 1; i <= 8; i++)
         {
             for (var w = 0; w < 8; w++)
-           {
+            {
                 var wave = this.layer.create(area.randomX, area.randomY, 'waves', this.rnd.between(0, 2));
                 wave.anchor.y = -1.5;
                 this.physics.arcade.enable(wave);
-               wave.body.velocity.x = -120 + (i * -30);
-           }
+                wave.body.velocity.x = -120 + (i * -30);
+            }
 
-          area.y += 65;
+            area.y += 65;
         }
 
         this.line = new Phaser.Line(this.boat.x - 28, this.boat.y, this.skier.x + 6, this.skier.y - 1);
